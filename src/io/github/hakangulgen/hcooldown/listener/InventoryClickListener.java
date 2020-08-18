@@ -38,13 +38,15 @@ public class InventoryClickListener implements Listener {
                         long secondsLeft = ((clickCooldown.get(player) / 1000) + cooldownSeconds) - (System.currentTimeMillis() / 1000);
                         if (secondsLeft > 0L) {
                             event.setCancelled(true);
-                            String warningMessage = variables.getInventoryWarnMessage().replace("%seconds%", secondsLeft + "");
-                            if (variables.getWarningType().equals("chat")) {
-                                player.sendMessage(warningMessage);
-                            } else if (plugin.checkHamster) {
-                                plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
-                            } else {
-                                player.sendMessage(warningMessage);
+                            if (variables.isInventoryWarnEnabled()) {
+                                String warningMessage = variables.getInventoryWarnMessage().replace("%seconds%", secondsLeft + "");
+                                if (variables.getWarningType().equals("chat")) {
+                                    player.sendMessage(warningMessage);
+                                } else if (plugin.checkHamster) {
+                                    plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
+                                } else {
+                                    player.sendMessage(warningMessage);
+                                }
                             }
                             return;
                         }

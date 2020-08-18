@@ -42,12 +42,14 @@ public class PlayerInteractListener implements Listener {
                         if (secondsLeft > 0L) {
                             event.setCancelled(true);
                             String warningMessage = variables.getInteractWarnMessage().replace("%seconds%", secondsLeft + "");
-                            if (variables.getWarningType().equals("chat")) {
-                                player.sendMessage(warningMessage);
-                            } else if (plugin.checkHamster) {
-                                plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
-                            } else {
-                                player.sendMessage(warningMessage);
+                            if (variables.isInteractWarnEnabled()) {
+                                if (variables.getWarningType().equals("chat")) {
+                                    player.sendMessage(warningMessage);
+                                } else if (plugin.checkHamster) {
+                                    plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
+                                } else {
+                                    player.sendMessage(warningMessage);
+                                }
                             }
                             return;
                         }
