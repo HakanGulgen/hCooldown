@@ -1,0 +1,44 @@
+# hCooldown by HKNGLGN (hknn)
+# Discord: hknn#1229
+# A lightweight cooldown plugin that adds cooldown to interact and click events to prevent lag.
+
+messages:
+  prefix: '&8[&3hCooldown&8]&r'
+  noPermission: '%prefix% &cYou do not have permission to do that.'
+  pluginReloaded: '%prefix% &aPlugin has been reloaded.'
+
+# Warning message types: 'chat' or 'actionbar'.
+# hCooldown requries 'HamsterAPI' for actionbar.
+warningType: 'chat'
+
+# Protection for PlayerInteractEvent
+interact:
+  # Enable this if you want to cancel interact when player interacts too fast.
+  enabled: true
+
+  # If you enable this the plugin will check only items that has item meta.
+  checkItemMeta: true
+
+  # Time before interact (seconds)
+  cooldown: 3
+
+  # Warning message when player interacts too fast.
+  warningMessage:
+    enabled: true
+    message: '%prefix% &cYou have to wait &b%seconds% &cseconds before interact again!'
+
+# Protection for InventoryClickEvent
+inventoryClick:
+  # Enable this if you want to cancel inventory click when player clicks too fast.
+  enabled: true
+
+  # If you enable this the plugin will check only items that has item meta.
+  checkItemMeta: true
+
+  # Time before click (seconds)
+  cooldown: 3
+
+  # Warning message when player clicks too fast.
+  warningMessage:
+    enabled: true
+    message: '%prefix% &cYou have to wait &b%seconds% &cseconds before click again!'

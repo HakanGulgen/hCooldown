@@ -1,0 +1,13 @@
+name: hCooldown
+version: 0.0.1
+author: HKNGLGN
+description: A lightweight cooldown plugin that adds cooldown to interact and click events to prevent lag.
+
+main: io.github.hakangulgen.hcooldown.hCooldownPlugin
+
+softdepend: [HamsterAPI]
+
+commands:
+  hcooldown:
+    aliases: [hcd]
+    description: Main plugin command.
