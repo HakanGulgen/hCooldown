@@ -4,6 +4,7 @@ import dev._2lstudios.hamsterapi.HamsterAPI;
 import dev._2lstudios.hamsterapi.hamsterplayer.HamsterPlayerManager;
 import io.github.hakangulgen.hcooldown.command.hCooldownCommand;
 import io.github.hakangulgen.hcooldown.listener.InventoryClickListener;
+import io.github.hakangulgen.hcooldown.listener.NPCRightClickListener;
 import io.github.hakangulgen.hcooldown.listener.PlayerInteractListener;
 import io.github.hakangulgen.hcooldown.listener.PlayerQuitListener;
 import io.github.hakangulgen.hcooldown.util.ConfigurationUtil;
@@ -30,6 +31,13 @@ public class hCooldownPlugin extends JavaPlugin {
         configurationUtil.createConfiguration("%datafolder%/config.yml");
 
         configurationVariables = new ConfigurationVariables(configurationUtil);
+
+        if (configurationVariables.isCitizensEnabled()) {
+            if (pluginManager.getPlugin("Citizens") != null) {
+                pluginManager.registerEvents(new NPCRightClickListener(this), this);
+                this.getLogger().info("Succesfully hooked with Citizens.");
+            }
+        }
 
         if (!configurationVariables.getWarningType().equals("chat")) {
             if (pluginManager.getPlugin("HamsterAPI") == null) {

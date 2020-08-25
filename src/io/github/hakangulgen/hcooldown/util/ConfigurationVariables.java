@@ -8,12 +8,13 @@ public class ConfigurationVariables {
     private final ConfigurationUtil configurationUtil;
 
     private String prefix, noPermission, pluginReloaded, warningType,
-            interactWarnMessage, inventoryWarnMessage;
+            interactWarnMessage, inventoryWarnMessage, citizensWarnMessage;
 
     private boolean interactEnabled, interactItemMetaEnabled, inventoryEnabled,
-            inventoryItemMetaEnabled, interactWarnEnabled, inventoryWarnEnabled;
+            inventoryItemMetaEnabled, interactWarnEnabled, inventoryWarnEnabled,
+            citizensEnabled, citizensWarnEnabled;
 
-    private int interactCooldown, inventoryCooldown;
+    private int interactCooldown, inventoryCooldown, citizensCooldown;
 
     public ConfigurationVariables(ConfigurationUtil configurationUtil) {
         this.configurationUtil = configurationUtil;
@@ -40,6 +41,11 @@ public class ConfigurationVariables {
         inventoryCooldown = config.getInt("inventoryClick.cooldown");
         inventoryWarnEnabled = config.getBoolean("inventoryClick.warningMessage.enabled");
         inventoryWarnMessage = ChatColor.translateAlternateColorCodes('&', config.getString("inventoryClick.warningMessage.message").replace("%prefix%", prefix));
+
+        citizensEnabled = config.getBoolean("citizensRightClick.enabled");
+        citizensCooldown = config.getInt("citizensRightClick.cooldown");
+        citizensWarnEnabled = config.getBoolean("citizensRightClick.warningMessage.enabled");
+        citizensWarnMessage = ChatColor.translateAlternateColorCodes('&', config.getString("citizensRightClick.warningMessage.message").replace("%prefix%", prefix));
     }
 
     public String getPrefix() { return prefix; }
@@ -69,5 +75,13 @@ public class ConfigurationVariables {
     public boolean isInteractItemMetaEnabled() { return interactItemMetaEnabled; }
 
     public boolean isInventoryItemMetaEnabled() { return inventoryItemMetaEnabled; }
+
+    public String getCitizensWarnMessage() { return citizensWarnMessage; }
+
+    public boolean isCitizensEnabled() { return citizensEnabled; }
+
+    public boolean isCitizensWarnEnabled() { return citizensWarnEnabled; }
+
+    public int getCitizensCooldown() { return citizensCooldown; }
 
 }

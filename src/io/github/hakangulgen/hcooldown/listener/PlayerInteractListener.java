@@ -56,6 +56,7 @@ public class PlayerInteractListener implements Listener {
                         player.sendMessage(warningMessage);
                     }
                 }
+
                 return;
             }
         }

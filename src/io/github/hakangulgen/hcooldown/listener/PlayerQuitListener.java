@@ -13,5 +13,6 @@ public class PlayerQuitListener implements Listener {
 
         PlayerInteractListener.interactCooldown.remove(player);
         InventoryClickListener.clickCooldown.remove(player);
+        NPCRightClickListener.rightClickCooldown.remove(player);
     }
 }

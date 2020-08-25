@@ -20,6 +20,7 @@ public class hCooldownCommand implements CommandExecutor {
                 return true;
             }
         }
+
         if (args.length != 1) {
             help(sender);
         } else {
@@ -30,11 +31,14 @@ public class hCooldownCommand implements CommandExecutor {
                 help(sender);
             }
         }
+
         return false;
     }
 
     private void help(CommandSender sender) {
-        sender.sendMessage(variables.getPrefix() + " §bAuthor: §7HKNGLGN (hknn)");
-        sender.sendMessage(variables.getPrefix() + " §b/hcooldown reload §8- §7Reload configuration.");
+        final String prefix = variables.getPrefix();
+
+        sender.sendMessage(prefix + " §bAuthor: §7HKNGLGN (hknn)");
+        sender.sendMessage(prefix + " §b/hcooldown reload §8- §7Reload configuration.");
     }
 }

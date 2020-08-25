@@ -42,3 +42,16 @@ inventoryClick:
   warningMessage:
     enabled: true
     message: '%prefix% &cYou have to wait &b%seconds% &cseconds before click again!'
+
+# Protection for Citizens's NPCRightClickEvent
+citizensRightClick:
+  # Enable this if you want to cancel right click when player clicks too fast.
+  enabled: true
+
+  # Time before click (seconds)
+  cooldown: 3
+
+  # Warning message when player clicks too fast.
+  warningMessage:
+    enabled: true
+    message: '%prefix% &cYou have to wait &b%seconds% &cseconds before click again!'

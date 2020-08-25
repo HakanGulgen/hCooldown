@@ -28,7 +28,7 @@ public class InventoryClickListener implements Listener {
 
         final ConfigurationVariables variables = plugin.getVariables();
 
-        if (variables.isInventoryEnabled()) return;
+        if (!variables.isInventoryEnabled()) return;
 
         final ItemStack item = event.getCurrentItem();
 
@@ -55,6 +55,7 @@ public class InventoryClickListener implements Listener {
                         player.sendMessage(warningMessage);
                     }
                 }
+
                 return;
             }
         }
