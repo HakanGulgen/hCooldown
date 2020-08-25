@@ -10,13 +10,11 @@ public class hCooldownCommand implements CommandExecutor {
 
     private final ConfigurationVariables variables;
 
-    public hCooldownCommand(ConfigurationVariables variables) {
-        this.variables = variables;
-    }
+    public hCooldownCommand(ConfigurationVariables variables) { this.variables = variables; }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
-            Player player = (Player) sender;
+            final Player player = (Player) sender;
             if (!player.hasPermission("hcooldown.usage")) {
                 player.sendMessage(variables.getNoPermission());
                 return true;

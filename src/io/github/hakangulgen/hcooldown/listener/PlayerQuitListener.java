@@ -8,8 +8,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuitListener implements Listener {
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
+    public void onQuit(final PlayerQuitEvent event) {
+        final Player player = event.getPlayer();
 
         PlayerInteractListener.interactCooldown.remove(player);
         InventoryClickListener.clickCooldown.remove(player);

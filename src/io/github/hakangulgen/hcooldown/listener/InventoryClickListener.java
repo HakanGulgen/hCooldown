@@ -23,37 +23,42 @@ public class InventoryClickListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onClick(InventoryClickEvent event) {
-        if (event.getWhoClicked() instanceof Player) {
-            ConfigurationVariables variables = plugin.getVariables();
-            if (variables.isInventoryEnabled()) {
-                ItemStack item = event.getCurrentItem();
-                if (item != null) {
-                    if (variables.isInventoryItemMetaEnabled() && !item.hasItemMeta()) {
-                        return;
+    public void onClick(final InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player)) return;
+
+        final ConfigurationVariables variables = plugin.getVariables();
+
+        if (variables.isInventoryEnabled()) return;
+
+        final ItemStack item = event.getCurrentItem();
+
+        if (item == null) return;
+
+        if (variables.isInventoryItemMetaEnabled() && !item.hasItemMeta()) return;
+
+        final Player player = (Player) event.getWhoClicked();
+
+        if (clickCooldown.containsKey(player)) {
+            final int cooldownSeconds = variables.getInventoryCooldown();
+            final long secondsLeft = ((clickCooldown.get(player) / 1000) + cooldownSeconds) - (System.currentTimeMillis() / 1000);
+
+            if (secondsLeft > 0L) {
+                event.setCancelled(true);
+
+                if (variables.isInventoryWarnEnabled()) {
+                    String warningMessage = variables.getInventoryWarnMessage().replace("%seconds%", secondsLeft + "");
+                    if (variables.getWarningType().equals("chat")) {
+                        player.sendMessage(warningMessage);
+                    } else if (plugin.checkHamster) {
+                        plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
+                    } else {
+                        player.sendMessage(warningMessage);
                     }
-                    Player player = (Player) event.getWhoClicked();
-                    if (clickCooldown.containsKey(player)) {
-                        int cooldownSeconds = variables.getInventoryCooldown();
-                        long secondsLeft = ((clickCooldown.get(player) / 1000) + cooldownSeconds) - (System.currentTimeMillis() / 1000);
-                        if (secondsLeft > 0L) {
-                            event.setCancelled(true);
-                            if (variables.isInventoryWarnEnabled()) {
-                                String warningMessage = variables.getInventoryWarnMessage().replace("%seconds%", secondsLeft + "");
-                                if (variables.getWarningType().equals("chat")) {
-                                    player.sendMessage(warningMessage);
-                                } else if (plugin.checkHamster) {
-                                    plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
-                                } else {
-                                    player.sendMessage(warningMessage);
-                                }
-                            }
-                            return;
-                        }
-                    }
-                    clickCooldown.put(player, System.currentTimeMillis());
                 }
+                return;
             }
         }
+
+        clickCooldown.put(player, System.currentTimeMillis());
     }
 }
