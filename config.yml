@@ -46,7 +46,7 @@ inventoryClick:
 # Protection for Citizens's NPCRightClickEvent
 citizensRightClick:
   # Enable this if you want to cancel right click when player clicks too fast.
-  enabled: true
+  enabled: false
 
   # Time before click (seconds)
   cooldown: 3
