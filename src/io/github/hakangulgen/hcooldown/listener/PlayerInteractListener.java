@@ -1,6 +1,7 @@
 package io.github.hakangulgen.hcooldown.listener;
 
 import io.github.hakangulgen.hcooldown.hCooldownPlugin;
+import io.github.hakangulgen.hcooldown.util.ActionbarUtil;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,6 +26,7 @@ public class PlayerInteractListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onInteract(final PlayerInteractEvent event) {
         if (!event.hasItem()) return;
+
         if (event.getItem() == null) return;
 
         final Action action = event.getAction();
@@ -46,14 +48,13 @@ public class PlayerInteractListener implements Listener {
             if (secondsLeft > 0L) {
                 event.setCancelled(true);
 
-                String warningMessage = variables.getInteractWarnMessage().replace("%seconds%", secondsLeft + "");
                 if (variables.isInteractWarnEnabled()) {
+                    final String warningMessage = variables.getInteractWarnMessage().replace("%seconds%", secondsLeft + "");
+
                     if (variables.getWarningType().equals("chat")) {
                         player.sendMessage(warningMessage);
-                    } else if (plugin.checkHamster) {
-                        plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
                     } else {
-                        player.sendMessage(warningMessage);
+                        ActionbarUtil.sendActionbar(player, warningMessage);
                     }
                 }
 

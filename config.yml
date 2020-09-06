@@ -8,7 +8,6 @@ messages:
   pluginReloaded: '%prefix% &aPlugin has been reloaded.'
 
 # Warning message types: 'chat' or 'actionbar'.
-# hCooldown requries 'HamsterAPI' for actionbar.
 warningType: 'chat'
 
 # Protection for PlayerInteractEvent

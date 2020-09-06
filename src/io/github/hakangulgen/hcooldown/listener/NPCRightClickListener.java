@@ -1,6 +1,7 @@
 package io.github.hakangulgen.hcooldown.listener;
 
 import io.github.hakangulgen.hcooldown.hCooldownPlugin;
+import io.github.hakangulgen.hcooldown.util.ActionbarUtil;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import org.bukkit.entity.Player;
@@ -22,7 +23,7 @@ public class NPCRightClickListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onRightclick(final NPCRightClickEvent event) {
+    public void onRightClick(final NPCRightClickEvent event) {
         final ConfigurationVariables variables = plugin.getVariables();
         if (!variables.isCitizensEnabled()) return;
 
@@ -36,13 +37,12 @@ public class NPCRightClickListener implements Listener {
                 event.setCancelled(true);
 
                 if (variables.isCitizensWarnEnabled()) {
-                    String warningMessage = variables.getCitizensWarnMessage().replace("%seconds%", secondsLeft + "");
+                    final String warningMessage = variables.getCitizensWarnMessage().replace("%seconds%", secondsLeft + "");
+
                     if (variables.getWarningType().equals("chat")) {
                         player.sendMessage(warningMessage);
-                    } else if (plugin.checkHamster) {
-                        plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
                     } else {
-                        player.sendMessage(warningMessage);
+                        ActionbarUtil.sendActionbar(player, warningMessage);
                     }
                 }
 

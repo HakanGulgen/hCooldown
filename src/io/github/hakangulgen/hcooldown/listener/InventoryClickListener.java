@@ -1,6 +1,7 @@
 package io.github.hakangulgen.hcooldown.listener;
 
 import io.github.hakangulgen.hcooldown.hCooldownPlugin;
+import io.github.hakangulgen.hcooldown.util.ActionbarUtil;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,13 +47,12 @@ public class InventoryClickListener implements Listener {
                 event.setCancelled(true);
 
                 if (variables.isInventoryWarnEnabled()) {
-                    String warningMessage = variables.getInventoryWarnMessage().replace("%seconds%", secondsLeft + "");
+                    final String warningMessage = variables.getInventoryWarnMessage().replace("%seconds%", secondsLeft + "");
+
                     if (variables.getWarningType().equals("chat")) {
                         player.sendMessage(warningMessage);
-                    } else if (plugin.checkHamster) {
-                        plugin.getHamsterAPI().get(player).sendActionbar(warningMessage);
                     } else {
-                        player.sendMessage(warningMessage);
+                        ActionbarUtil.sendActionbar(player, warningMessage);
                     }
                 }
 
