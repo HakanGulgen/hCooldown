@@ -23,13 +23,12 @@ public class hCooldownCommand implements CommandExecutor {
 
         if (args.length != 1) {
             help(sender);
+        } else if (args[0].equalsIgnoreCase("reload")) {
+            variables.reloadConfig();
+
+            sender.sendMessage(variables.getPluginReloaded());
         } else {
-            if (args[0].equalsIgnoreCase("reload")) {
-                variables.reloadConfig();
-                sender.sendMessage(variables.getPluginReloaded());
-            } else {
-                help(sender);
-            }
+            help(sender);
         }
 
         return false;

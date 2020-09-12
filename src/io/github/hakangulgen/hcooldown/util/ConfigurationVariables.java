@@ -60,6 +60,8 @@ public class ConfigurationVariables {
 
     public String getInventoryWarnMessage() { return inventoryWarnMessage; }
 
+    public String getCitizensWarnMessage() { return citizensWarnMessage; }
+
     public boolean isInteractEnabled() { return interactEnabled; }
 
     public boolean isInventoryEnabled() { return inventoryEnabled; }
@@ -68,20 +70,18 @@ public class ConfigurationVariables {
 
     public boolean isInventoryWarnEnabled() { return inventoryWarnEnabled; }
 
-    public int getInteractCooldown() { return interactCooldown; }
-
-    public int getInventoryCooldown() { return inventoryCooldown; }
-
     public boolean isInteractItemMetaEnabled() { return interactItemMetaEnabled; }
 
     public boolean isInventoryItemMetaEnabled() { return inventoryItemMetaEnabled; }
-
-    public String getCitizensWarnMessage() { return citizensWarnMessage; }
 
     public boolean isCitizensEnabled() { return citizensEnabled; }
 
     public boolean isCitizensWarnEnabled() { return citizensWarnEnabled; }
 
     public int getCitizensCooldown() { return citizensCooldown; }
+
+    public int getInteractCooldown() { return interactCooldown; }
+
+    public int getInventoryCooldown() { return inventoryCooldown; }
 
 }

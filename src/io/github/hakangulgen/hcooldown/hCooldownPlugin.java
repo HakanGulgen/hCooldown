@@ -7,7 +7,6 @@ import io.github.hakangulgen.hcooldown.listener.PlayerInteractListener;
 import io.github.hakangulgen.hcooldown.listener.PlayerQuitListener;
 import io.github.hakangulgen.hcooldown.util.ConfigurationUtil;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
-import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,24 +16,22 @@ public class hCooldownPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        final Server server = this.getServer();
-        final PluginManager pluginManager = server.getPluginManager();
-
         final ConfigurationUtil configurationUtil = new ConfigurationUtil(this);
 
         configurationUtil.createConfiguration("%datafolder%/config.yml");
 
         configurationVariables = new ConfigurationVariables(configurationUtil);
 
+        final PluginManager pluginManager = this.getServer().getPluginManager();
+
         this.registerListeners(pluginManager);
 
         this.getCommand("hcooldown").setExecutor(new hCooldownCommand(configurationVariables));
 
-        if (configurationVariables.isCitizensEnabled()) {
-            if (pluginManager.getPlugin("Citizens") != null) {
-                pluginManager.registerEvents(new NPCRightClickListener(this), this);
-                this.getLogger().info("Successfully hooked with Citizens.");
-            }
+        if (configurationVariables.isCitizensEnabled() && pluginManager.getPlugin("Citizens") != null) {
+            pluginManager.registerEvents(new NPCRightClickListener(this), this);
+
+            this.getLogger().info("Successfully hooked with Citizens.");
         }
     }
 
