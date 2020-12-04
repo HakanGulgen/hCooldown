@@ -12,35 +12,26 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class hCooldownPlugin extends JavaPlugin {
 
-    private ConfigurationVariables configurationVariables;
-
     @Override
     public void onEnable() {
+        final PluginManager pluginManager = this.getServer().getPluginManager();
+
         final ConfigurationUtil configurationUtil = new ConfigurationUtil(this);
 
         configurationUtil.createConfiguration("%datafolder%/config.yml");
 
-        configurationVariables = new ConfigurationVariables(configurationUtil);
+        final ConfigurationVariables variables = new ConfigurationVariables(configurationUtil);
 
-        final PluginManager pluginManager = this.getServer().getPluginManager();
+        pluginManager.registerEvents(new InventoryClickListener(variables), this);
+        pluginManager.registerEvents(new PlayerInteractListener(variables), this);
+        pluginManager.registerEvents(new PlayerQuitListener(), this);
 
-        this.registerListeners(pluginManager);
+        this.getCommand("hcooldown").setExecutor(new hCooldownCommand(variables));
 
-        this.getCommand("hcooldown").setExecutor(new hCooldownCommand(configurationVariables));
-
-        if (configurationVariables.isCitizensEnabled() && pluginManager.getPlugin("Citizens") != null) {
-            pluginManager.registerEvents(new NPCRightClickListener(this), this);
+        if (variables.isCitizensEnabled() && pluginManager.getPlugin("Citizens") != null) {
+            pluginManager.registerEvents(new NPCRightClickListener(variables), this);
 
             this.getLogger().info("Successfully hooked with Citizens.");
         }
     }
-
-    private void registerListeners(PluginManager pluginManager) {
-        pluginManager.registerEvents(new InventoryClickListener(this), this);
-        pluginManager.registerEvents(new PlayerInteractListener(this), this);
-        pluginManager.registerEvents(new PlayerQuitListener(), this);
-    }
-
-    public ConfigurationVariables getVariables() { return configurationVariables; }
-
 }

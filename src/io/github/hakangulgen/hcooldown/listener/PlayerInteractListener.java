@@ -1,43 +1,41 @@
 package io.github.hakangulgen.hcooldown.listener;
 
-import io.github.hakangulgen.hcooldown.hCooldownPlugin;
-import io.github.hakangulgen.hcooldown.util.ActionbarUtil;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
+import io.github.hakangulgen.hcooldown.util.NMS;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerInteractListener implements Listener {
 
-    private final hCooldownPlugin plugin;
+    private final ConfigurationVariables variables;
+
+    public PlayerInteractListener(ConfigurationVariables variables) {
+        this.variables = variables;
+    }
 
     public static Map<Player, Long> interactCooldown = new HashMap<>();
 
-    public PlayerInteractListener(hCooldownPlugin plugin) {
-        this.plugin = plugin;
-    }
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void onInteract(final PlayerInteractEvent event) {
-        if (!event.hasItem()) return;
+        if (!variables.isInteractEnabled()) return;
 
-        if (event.getItem() == null) return;
+        final ItemStack item = event.getItem();
+
+        if (item == null) return;
 
         final Action action = event.getAction();
 
         if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) return;
 
-        final ConfigurationVariables variables = plugin.getVariables();
-
-        if (!variables.isInteractEnabled()) return;
-
-        if (variables.isInteractItemMetaEnabled() && !event.getItem().hasItemMeta()) return;
+        if (variables.isInteractItemMetaEnabled() && !item.hasItemMeta()) return;
 
         final Player player = event.getPlayer();
 
@@ -51,10 +49,10 @@ public class PlayerInteractListener implements Listener {
                 if (variables.isInteractWarnEnabled()) {
                     final String warningMessage = variables.getInteractWarnMessage().replace("%seconds%", secondsLeft + "");
 
-                    if (variables.getWarningType().equals("chat")) {
-                        player.sendMessage(warningMessage);
+                    if (variables.getWarningType() == 1) {
+                        NMS.sendActionbar(player, warningMessage);
                     } else {
-                        ActionbarUtil.sendActionbar(player, warningMessage);
+                        player.sendMessage(warningMessage);
                     }
                 }
 

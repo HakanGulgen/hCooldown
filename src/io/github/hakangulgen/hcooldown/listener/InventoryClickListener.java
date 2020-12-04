@@ -1,8 +1,7 @@
 package io.github.hakangulgen.hcooldown.listener;
 
-import io.github.hakangulgen.hcooldown.hCooldownPlugin;
-import io.github.hakangulgen.hcooldown.util.ActionbarUtil;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
+import io.github.hakangulgen.hcooldown.util.NMS;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,19 +14,17 @@ import java.util.Map;
 
 public class InventoryClickListener implements Listener {
 
-    private final hCooldownPlugin plugin;
+    private final ConfigurationVariables variables;
+
+    public InventoryClickListener(ConfigurationVariables variables) {
+        this.variables = variables;
+    }
 
     public static Map<Player, Long> clickCooldown = new HashMap<>();
-
-    public InventoryClickListener(hCooldownPlugin plugin) {
-        this.plugin = plugin;
-    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onClick(final InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) return;
-
-        final ConfigurationVariables variables = plugin.getVariables();
 
         if (!variables.isInventoryEnabled()) return;
 
@@ -49,13 +46,12 @@ public class InventoryClickListener implements Listener {
                 if (variables.isInventoryWarnEnabled()) {
                     final String warningMessage = variables.getInventoryWarnMessage().replace("%seconds%", secondsLeft + "");
 
-                    if (variables.getWarningType().equals("chat")) {
-                        player.sendMessage(warningMessage);
+                    if (variables.getWarningType() == 1) {
+                        NMS.sendActionbar(player, warningMessage);
                     } else {
-                        ActionbarUtil.sendActionbar(player, warningMessage);
+                        player.sendMessage(warningMessage);
                     }
                 }
-
                 return;
             }
         }

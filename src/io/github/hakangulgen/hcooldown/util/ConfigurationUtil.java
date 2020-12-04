@@ -12,9 +12,7 @@ public class ConfigurationUtil {
 
     private final hCooldownPlugin plugin;
 
-    public ConfigurationUtil(hCooldownPlugin plugin) {
-        this.plugin = plugin;
-    }
+    public ConfigurationUtil(hCooldownPlugin plugin) { this.plugin = plugin; }
 
     public YamlConfiguration getConfiguration(String filePath) {
         final File dataFolder = plugin.getDataFolder();

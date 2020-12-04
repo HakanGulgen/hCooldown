@@ -1,56 +1,39 @@
-# hCooldown by HKNGLGN (hknn)
-# Discord: hknn#1229
+# hCooldown (HKNGLGN)
 # A lightweight cooldown plugin that adds cooldown to interact and click events to prevent lag.
 
 messages:
   prefix: '&8[&3hCooldown&8]&r'
-  noPermission: '%prefix% &cYou do not have permission to do that.'
-  pluginReloaded: '%prefix% &aPlugin has been reloaded.'
+  no-permission: '%prefix% &cYou do not have permission to do that.'
+  plugin-reloaded: '%prefix% &aPlugin has been reloaded.'
 
-# Warning message types: 'chat' or 'actionbar'.
-warningType: 'chat'
+# WARN TYPES
+# 1 = ACTIONBAR, 2 = CHAT
+warn-type: 1
 
-# Protection for PlayerInteractEvent
 interact:
-  # Enable this if you want to cancel interact when player interacts too fast.
   enabled: true
-
-  # If you enable this the plugin will check only items that has item meta.
-  checkItemMeta: true
-
-  # Time before interact (seconds)
   cooldown: 3
-
-  # Warning message when player interacts too fast.
-  warningMessage:
+  check:
+    item-meta: true
+  warn:
     enabled: true
-    message: '%prefix% &cYou have to wait &b%seconds% &cseconds before interact again!'
+    message: '&e&lYOU HAVE TO WAIT &d&l%seconds% SECONDS &e&lBEFORE INTERACT AGAIN!'
 
-# Protection for InventoryClickEvent
-inventoryClick:
-  # Enable this if you want to cancel inventory click when player clicks too fast.
+inventory-click:
   enabled: true
-
-  # If you enable this the plugin will check only items that has item meta.
-  checkItemMeta: true
-
-  # Time before click (seconds)
   cooldown: 3
-
-  # Warning message when player clicks too fast.
-  warningMessage:
+  check:
+    item-meta: true
+  warn:
     enabled: true
-    message: '%prefix% &cYou have to wait &b%seconds% &cseconds before click again!'
+    message: '&e&lYOU HAVE TO WAIT &d&l%seconds% SECONDS &e&lBEFORE INTERACT AGAIN!'
 
-# Protection for Citizens's NPCRightClickEvent
-citizensRightClick:
-  # Enable this if you want to cancel right click when player clicks too fast.
+citizens-click:
   enabled: false
-
-  # Time before click (seconds)
   cooldown: 3
-
-  # Warning message when player clicks too fast.
-  warningMessage:
+  check:
+    right-click: true
+    left-click: false # TODO
+  warn:
     enabled: true
-    message: '%prefix% &cYou have to wait &b%seconds% &cseconds before click again!'
+    message: '&e&lYOU HAVE TO WAIT &d&l%seconds% SECONDS &e&lBEFORE INTERACT AGAIN!'
