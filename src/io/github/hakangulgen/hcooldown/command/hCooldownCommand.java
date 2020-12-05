@@ -1,8 +1,7 @@
 package io.github.hakangulgen.hcooldown.command;
 
-import io.github.hakangulgen.hcooldown.listener.InventoryClickListener;
 import io.github.hakangulgen.hcooldown.listener.NPCRightClickListener;
-import io.github.hakangulgen.hcooldown.listener.PlayerInteractListener;
+import io.github.hakangulgen.hcooldown.listener.PacketReceiveListener;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,9 +25,9 @@ public class hCooldownCommand implements CommandExecutor {
         if (args.length != 1) {
             this.help(sender);
         } else if (args[0].equalsIgnoreCase("reload")) {
-            InventoryClickListener.clickCooldown.clear();
-            NPCRightClickListener.clickCooldown.clear();
-            PlayerInteractListener.interactCooldown.clear();
+            PacketReceiveListener.clickCooldown.clear();
+            PacketReceiveListener.interactCooldown.clear();
+            NPCRightClickListener.rightClickCooldown.clear();
 
             variables.reloadConfig();
 

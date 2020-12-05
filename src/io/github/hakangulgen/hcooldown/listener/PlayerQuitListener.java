@@ -12,17 +12,17 @@ public class PlayerQuitListener implements Listener {
     public void onQuit(final PlayerQuitEvent event) {
         final Player player = event.getPlayer();
 
-        PlayerInteractListener.interactCooldown.remove(player);
-        InventoryClickListener.clickCooldown.remove(player);
-        NPCRightClickListener.clickCooldown.remove(player);
+        PacketReceiveListener.interactCooldown.remove(player);
+        PacketReceiveListener.clickCooldown.remove(player);
+        NPCRightClickListener.rightClickCooldown.remove(player);
     }
 
     @EventHandler
     public void onKick(final PlayerKickEvent event) {
         final Player player = event.getPlayer();
 
-        PlayerInteractListener.interactCooldown.remove(player);
-        InventoryClickListener.clickCooldown.remove(player);
-        NPCRightClickListener.clickCooldown.remove(player);
+        PacketReceiveListener.interactCooldown.remove(player);
+        PacketReceiveListener.clickCooldown.remove(player);
+        NPCRightClickListener.rightClickCooldown.remove(player);
     }
 }
