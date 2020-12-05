@@ -1,5 +1,5 @@
 name: hCooldown
-version: 0.0.4
+version: 0.0.5
 author: HKNGLGN
 description: A lightweight cooldown plugin that adds cooldown to interact and click events to prevent lag.
 
