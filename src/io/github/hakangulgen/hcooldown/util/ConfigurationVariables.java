@@ -9,7 +9,7 @@ public class ConfigurationVariables {
     private String prefix, noPermission, pluginReloaded,
             interactWarnMessage, inventoryWarnMessage, citizensWarnMessage;
 
-    private boolean interactEnabled, interactItemMetaEnabled, inventoryEnabled,
+    private boolean useHamsterAPIEnabled, interactEnabled, interactItemMetaEnabled, inventoryEnabled,
             inventoryItemMetaEnabled, interactWarnEnabled, inventoryWarnEnabled,
             citizensEnabled, citizensWarnEnabled;
 
@@ -27,6 +27,9 @@ public class ConfigurationVariables {
         prefix = config.getString("messages.prefix").replace("&", "§");
         noPermission = config.getString("messages.no-permission").replace("&", "§").replace("%prefix%", prefix);
         pluginReloaded = config.getString("messages.plugin-reloaded").replace("&", "§").replace("%prefix%", prefix);
+
+        useHamsterAPIEnabled = config.getBoolean("useHamsterAPI");
+
         warningType = config.getInt("warn-type");
 
         interactEnabled = config.getBoolean("interact.enabled");
@@ -82,5 +85,9 @@ public class ConfigurationVariables {
     public int getInteractCooldown() { return interactCooldown; }
 
     public int getInventoryCooldown() { return inventoryCooldown; }
+
+    public void setUseHamsterAPIEnabled(boolean useHamsterAPIEnabled) { this.useHamsterAPIEnabled = useHamsterAPIEnabled;
+    }
+    public boolean isUseHamsterAPIEnabled() { return useHamsterAPIEnabled; }
 
 }

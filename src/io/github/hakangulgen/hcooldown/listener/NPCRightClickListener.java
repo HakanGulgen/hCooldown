@@ -1,6 +1,6 @@
 package io.github.hakangulgen.hcooldown.listener;
 
-import dev._2lstudios.hamsterapi.hamsterplayer.HamsterPlayerManager;
+import io.github.hakangulgen.hcooldown.util.ActionbarUtil;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import org.bukkit.entity.Player;
@@ -14,11 +14,9 @@ import java.util.Map;
 public class NPCRightClickListener implements Listener {
 
     private final ConfigurationVariables variables;
-    private final HamsterPlayerManager playerManager;
 
-    public NPCRightClickListener(ConfigurationVariables variables, HamsterPlayerManager playerManager) {
+    public NPCRightClickListener(ConfigurationVariables variables) {
         this.variables = variables;
-        this.playerManager = playerManager;
     }
 
     public static Map<Player, Long> rightClickCooldown = new HashMap<>();
@@ -40,7 +38,7 @@ public class NPCRightClickListener implements Listener {
                     final String warningMessage = variables.getCitizensWarnMessage().replace("%seconds%", secondsLeft + "");
 
                     if (variables.getWarningType() == 1) {
-                        playerManager.get(player).sendActionbar(warningMessage);
+                        ActionbarUtil.sendActionbar(player, warningMessage);
                     } else {
                         player.sendMessage(warningMessage);
                     }

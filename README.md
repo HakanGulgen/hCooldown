@@ -9,5 +9,7 @@ Spigot: https://www.spigotmc.org/resources/hcooldown-protection-for-interact-cli
 ### PERMISSIONS
 - hcooldown.usage
 
-### DEPEND
-- hCooldown requires 'HamsterAPI' to listens packets!
+### SOFT DEPEND
+If you set 'useHamsterAPI' value to true in configuration plugin uses packets instead of Bukkit events.
+For that plugin requires HamsterAPI to listens packets.
+Download: https://www.spigotmc.org/resources/2ls-hamsterapi.78831/

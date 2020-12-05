@@ -6,6 +6,10 @@ messages:
   no-permission: '%prefix% &cYou do not have permission to do that.'
   plugin-reloaded: '%prefix% &aPlugin has been reloaded.'
 
+# Should plugin use packets instead of Bukkit events?
+# This feature requires 'HamsterAPI' to work.
+useHamsterAPI: false
+
 # WARN TYPES
 # 1 = ACTIONBAR, 2 = CHAT
 warn-type: 1
@@ -26,7 +30,7 @@ inventory-click:
     item-meta: true
   warn:
     enabled: true
-    message: '&e&lYOU HAVE TO WAIT &d&l%seconds% SECONDS &e&lBEFORE INTERACT AGAIN!'
+    message: '&e&lYOU HAVE TO WAIT &d&l%seconds% SECONDS &e&lBEFORE CLICK AGAIN!'
 
 citizens-click:
   enabled: false

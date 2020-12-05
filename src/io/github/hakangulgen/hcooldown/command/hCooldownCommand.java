@@ -1,7 +1,9 @@
 package io.github.hakangulgen.hcooldown.command;
 
+import io.github.hakangulgen.hcooldown.listener.InventoryClickListener;
 import io.github.hakangulgen.hcooldown.listener.NPCRightClickListener;
 import io.github.hakangulgen.hcooldown.listener.PacketReceiveListener;
+import io.github.hakangulgen.hcooldown.listener.PlayerInteractListener;
 import io.github.hakangulgen.hcooldown.util.ConfigurationVariables;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,9 +27,15 @@ public class hCooldownCommand implements CommandExecutor {
         if (args.length != 1) {
             this.help(sender);
         } else if (args[0].equalsIgnoreCase("reload")) {
-            PacketReceiveListener.clickCooldown.clear();
-            PacketReceiveListener.interactCooldown.clear();
             NPCRightClickListener.rightClickCooldown.clear();
+
+            if (variables.isUseHamsterAPIEnabled()) {
+                PacketReceiveListener.interactCooldown.clear();
+                PacketReceiveListener.clickCooldown.clear();
+            } else {
+                InventoryClickListener.clickCooldown.clear();
+                PlayerInteractListener.interactCooldown.clear();
+            }
 
             variables.reloadConfig();
 
@@ -42,6 +50,7 @@ public class hCooldownCommand implements CommandExecutor {
         final String prefix = variables.getPrefix();
 
         sender.sendMessage(prefix + " §bAuthor: §7HKNGLGN (hknn)");
+        sender.sendMessage(prefix + " §7Plugin uses: §e" + (variables.isUseHamsterAPIEnabled() ? "Packets §8(§eHamsterAPI§8)" : "Bukkit events"));
         sender.sendMessage(prefix + " §b/hcooldown reload §8- §7Reload configuration.");
     }
 }

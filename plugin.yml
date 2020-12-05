@@ -3,8 +3,7 @@ version: 0.0.5
 author: HKNGLGN
 description: A lightweight cooldown plugin that adds cooldown to interact and click events to prevent lag.
 
-depend: [HamsterAPI]
-softdepend: [Citizens]
+softdepend: [HamsterAPI, Citizens]
 
 main: io.github.hakangulgen.hcooldown.hCooldownPlugin
 
