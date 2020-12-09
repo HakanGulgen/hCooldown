@@ -23,7 +23,7 @@ public class PlayerInteractListener implements Listener {
 
     public static Map<Player, Long> interactCooldown = new HashMap<>();
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onInteract(final PlayerInteractEvent event) {
         if (!variables.isInteractEnabled()) return;
 

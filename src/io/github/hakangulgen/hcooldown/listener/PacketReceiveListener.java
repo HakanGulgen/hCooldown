@@ -28,10 +28,8 @@ public class PacketReceiveListener implements Listener {
     public static Map<Player, Long> interactCooldown = new HashMap<>();
     public static Map<Player, Long> clickCooldown = new HashMap<>();
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPacketReceive(final PacketReceiveEvent event) {
-        if (event.isCancelled()) return;
-
         final PacketWrapper packetWrapper = event.getPacket();
         final PacketType packetType = packetWrapper.getType();
 

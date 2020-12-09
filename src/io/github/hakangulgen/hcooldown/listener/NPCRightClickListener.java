@@ -21,7 +21,7 @@ public class NPCRightClickListener implements Listener {
 
     public static Map<Player, Long> rightClickCooldown = new HashMap<>();
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onRightClick(final NPCRightClickEvent event) {
         if (!variables.isCitizensEnabled()) return;
 

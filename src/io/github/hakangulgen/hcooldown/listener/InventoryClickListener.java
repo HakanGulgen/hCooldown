@@ -22,10 +22,8 @@ public class InventoryClickListener implements Listener {
 
     public static Map<Player, Long> clickCooldown = new HashMap<>();
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onClick(final InventoryClickEvent event) {
-        if (event.isCancelled()) return;
-
         if (!(event.getWhoClicked() instanceof Player)) return;
 
         if (!variables.isInventoryEnabled()) return;
